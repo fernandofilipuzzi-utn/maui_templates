@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="FlyoutPageTabNavigation.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:FlyoutPageTabNavigation"
+    Shell.FlyoutBehavior="Disabled">
+
+    <!--Shell.FlyoutBehavior="Disabled" desaciva el menu-->
+
+    <TabBar>
+        <Tab Title="Productos" Icon="dotnet_bot.png">
+            <ShellContent
+                 Title="Compras"        
+                 ContentTemplate="{DataTemplate local:MainPage}"
+                 Route="MainPage"
+                 Icon="dotnet_bot.png"/>
+
+            <ShellContent
+                 Title="Contacto"        
+                 ContentTemplate="{DataTemplate local:ContactUs}"
+                 Route="ContactPage"
+                 Icon="dotnet_bot.png"/>
+
+            <ShellContent
+                 Title="Sobre Nosotros"        
+                 ContentTemplate="{DataTemplate local:AboutUs}"
+                 Route="AboutPage"
+                 Icon="dotnet_bot.png"/>
+        </Tab>
+
+        <Tab Title="Servicios" Icon="dotnet_bot.png">
+            <ShellContent
+              Title="Ubicación"        
+              ContentTemplate="{DataTemplate local:MainPage}"
+              Route="MainPage"
+              Icon="dotnet_bot.png"/>
+
+            <ShellContent
+              Title="Contact"        
+              ContentTemplate="{DataTemplate local:ContactUs}"
+              Route="ContactPage"
+              Icon="dotnet_bot.png"/>
+
+            <ShellContent
+              Title="Sobre Nosotros"        
+              ContentTemplate="{DataTemplate local:AboutUs}"
+              Route="AboutPage"
+              Icon="dotnet_bot.png"/>
+        </Tab>
+    </TabBar>
+
+</Shell>

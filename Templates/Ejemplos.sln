@@ -5,9 +5,11 @@ VisualStudioVersion = 17.10.34916.146
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NavegationPage", "NavegationPage\NavegationPage.csproj", "{AEABEA2F-34F4-4C81-BC04-6531B808540B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContentPageNavigation", "ContentPageNavigation\ContentPageNavigation.csproj", "{72725BF3-2030-4EBB-8FA2-CABE9E5A9134}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContentPageNavigation", "ContentPageNavigation\ContentPageNavigation.csproj", "{72725BF3-2030-4EBB-8FA2-CABE9E5A9134}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlyoutPageNavigation", "FlyoutPageNavigation\FlyoutPageNavigation.csproj", "{1EC72BC6-DCB2-46E2-ADD7-BFC213E84157}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlyoutPageNavigation", "FlyoutPageNavigation\FlyoutPageNavigation.csproj", "{1EC72BC6-DCB2-46E2-ADD7-BFC213E84157}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlyoutPageTabNavigation", "FlyoutPageTabNavigation\FlyoutPageTabNavigation.csproj", "{0535A739-6940-4A68-A0F0-01B8D8A8D1AD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,12 @@ Global
 		{1EC72BC6-DCB2-46E2-ADD7-BFC213E84157}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1EC72BC6-DCB2-46E2-ADD7-BFC213E84157}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1EC72BC6-DCB2-46E2-ADD7-BFC213E84157}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{0535A739-6940-4A68-A0F0-01B8D8A8D1AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0535A739-6940-4A68-A0F0-01B8D8A8D1AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0535A739-6940-4A68-A0F0-01B8D8A8D1AD}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{0535A739-6940-4A68-A0F0-01B8D8A8D1AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0535A739-6940-4A68-A0F0-01B8D8A8D1AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0535A739-6940-4A68-A0F0-01B8D8A8D1AD}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

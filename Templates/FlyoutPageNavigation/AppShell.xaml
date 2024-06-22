@@ -40,13 +40,13 @@
             Icon="dotnet_bot.png"/>
 
         <ShellContent
-            Title="Contact"        
+            Title="Contacto"        
             ContentTemplate="{DataTemplate local:ContactUs}"
             Route="ContactPage"
             Icon="dotnet_bot.png"/>
 
         <ShellContent
-            Title="About"        
+            Title="Sobre Nosotros"        
             ContentTemplate="{DataTemplate local:AboutUs}"
             Route="AboutPage"
             Icon="dotnet_bot.png"/>
@@ -60,39 +60,19 @@
             Icon="dotnet_bot.png"/>
 
         <ShellContent
-            Title="Contact"        
+            Title="Contacto"        
             ContentTemplate="{DataTemplate local:ContactUs}"
             Route="ContactPage"
             Icon="dotnet_bot.png"/>
 
         <ShellContent
-            Title="About"        
+            Title="Sobre Nosotros"        
             ContentTemplate="{DataTemplate local:AboutUs}"
             Route="AboutPage"
             Icon="dotnet_bot.png"/>
     </TabBar>
 
     <TabBar>
-        <!--<Tab>
-            <ShellContent
-                Title="Customer"        
-                ContentTemplate="{DataTemplate local:MainPage}"
-                Route="MainPage"
-                Icon="dotnet_bot.png"/>
-
-                <ShellContent
-                Title="Contact"        
-                ContentTemplate="{DataTemplate local:ContactUs}"
-                Route="ContactPage"
-                Icon="dotnet_bot.png"/>
-
-                <ShellContent
-                Title="About"        
-                ContentTemplate="{DataTemplate local:AboutUs}"
-                Route="AboutPage"
-                Icon="dotnet_bot.png"/>
-        </Tab>-->
-
         <ShellContent
          Title="Customer"        
          ContentTemplate="{DataTemplate local:MainPage}"
@@ -110,7 +90,6 @@
          ContentTemplate="{DataTemplate local:AboutUs}"
          Route="AboutPage"
          Icon="dotnet_bot.png"/>
-    </TabBar>
-    
-    
+    </TabBar>    
 </Shell>
+
