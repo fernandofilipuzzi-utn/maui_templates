@@ -7,9 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NavegationPage", "Navegatio
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlyoutPageNavigation", "FlyoutPageNavigation\FlyoutPageNavigation.csproj", "{1EC72BC6-DCB2-46E2-ADD7-BFC213E84157}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlyoutPageTabNavigation", "FlyoutPageTabNavigation\FlyoutPageTabNavigation.csproj", "{0535A739-6940-4A68-A0F0-01B8D8A8D1AD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlyoutPageTabNavigation", "FlyoutPageTabNavigation\FlyoutPageTabNavigation.csproj", "{0535A739-6940-4A68-A0F0-01B8D8A8D1AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ejemplo1ContentPage", "Ejemplo1ContentPage\Ejemplo1ContentPage.csproj", "{07DA629B-3A5F-429D-903D-B79434F8BA5A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ejemplo1ContentPage", "Ejemplo1ContentPage\Ejemplo1ContentPage.csproj", "{07DA629B-3A5F-429D-903D-B79434F8BA5A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ejemplo3SQLite", "Ejemplo3SQLite\Ejemplo3SQLite.csproj", "{62AA8905-174D-4397-A549-A68BB579F056}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,12 @@ Global
 		{07DA629B-3A5F-429D-903D-B79434F8BA5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{07DA629B-3A5F-429D-903D-B79434F8BA5A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{07DA629B-3A5F-429D-903D-B79434F8BA5A}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{62AA8905-174D-4397-A549-A68BB579F056}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62AA8905-174D-4397-A549-A68BB579F056}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62AA8905-174D-4397-A549-A68BB579F056}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{62AA8905-174D-4397-A549-A68BB579F056}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62AA8905-174D-4397-A549-A68BB579F056}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62AA8905-174D-4397-A549-A68BB579F056}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
