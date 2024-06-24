@@ -1,1 +1,0 @@
-﻿https://github.com/dotnet/maui-samples/tree/main/8.0/Data/TodoSQLite/TodoSQLite
