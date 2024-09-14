@@ -14,7 +14,7 @@ namespace Ejemplo1.Config
 
         protected override void OnConfiguring( DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Data Source=ef_demo.db");
+            optionsBuilder.UseSqlite("Data Source=../../../../ejemplo1.sqlite3");
         }
     }
 
