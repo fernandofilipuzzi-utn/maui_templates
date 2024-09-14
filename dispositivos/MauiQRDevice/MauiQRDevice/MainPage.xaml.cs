@@ -5,8 +5,6 @@ namespace MauiQRDevice
 {
     public partial class MainPage : ContentPage
     {
-        int count = 0;
-
         public MainPage()
         {
             InitializeComponent();
@@ -34,7 +32,6 @@ namespace MauiQRDevice
             {
                 await DisplayAlert("Result", result, "OK");
                 Camera.IsScanning = true;
-                //Camera.IsScanning = true;
             });
         }
     }

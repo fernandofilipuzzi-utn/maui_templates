@@ -4,6 +4,7 @@ dotnet add MauiQR.csproj package Microsoft.Maui.Controls.Compatibility --prerele
 dotnet clean
 dotnet restore
 dotnet build -f net8.0-android
+dotnet build -f net8.0-android34.0
 
 no es necesario configurar el target para api34
 
