@@ -1,10 +1,20 @@
 ﻿nota, no actualizar solo correr 
+
+```
 dotnet add MauiQR.csproj package BarcodeScanner.Mobile.Maui --prerelease -s=https://api.nuget.org/v3/index.json
 dotnet add MauiQR.csproj package Microsoft.Maui.Controls.Compatibility --prerelease -s=https://api.nuget.org/v3/index.json
 dotnet clean
 dotnet restore
 dotnet build -f net8.0-android
 dotnet build -f net8.0-android34.0
+```
+
+destildar
+
+
+elegir
+- Destino para la plataforma Android: Antroid 14.0 (nivel de API34)
+- Destilar : Implementación rápida  : Debug@net8.0-android34
 
 no es necesario configurar el target para api34
 

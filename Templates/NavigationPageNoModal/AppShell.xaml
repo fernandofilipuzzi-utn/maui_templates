@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="NavigationPageNoModal.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:NavigationPageNoModal"
+    Shell.FlyoutBehavior="Disabled"
+    Title="NavigationPageNoModal">
+
+    <ShellContent   Title="Home"
+                    ContentTemplate="{DataTemplate local:MainPage}"
+                    Route="MainPage" />
+    <!-- 
+    <ShellContent Title="Inicio" ContentTemplate="{DataTemplate local:MainPage}"/>
+    <ShellContent Route="Page1" ContentTemplate="{DataTemplate views:Page1}" />
+
+    <ShellC<ontent Title="Inicio" ContentTemplate="{DataTemplate local:MainPage}"/>
+    <ShellContent Title="Página 1" ContentTemplate="{DataTemplate local:Page1}" />
+    <ShellContent Title="Página 2" ContentTemplate="{DataTemplate local:Page2}" />
+   --> 
+</Shell>

@@ -11,7 +11,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlyoutPageTabNavigation", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ejemplo1ContentPage", "Ejemplo1ContentPage\Ejemplo1ContentPage.csproj", "{07DA629B-3A5F-429D-903D-B79434F8BA5A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ejemplo3SQLite", "Ejemplo3SQLite\Ejemplo3SQLite.csproj", "{62AA8905-174D-4397-A549-A68BB579F056}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ejemplo3SQLite", "Ejemplo3SQLite\Ejemplo3SQLite.csproj", "{62AA8905-174D-4397-A549-A68BB579F056}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sqlite", "sqlite", "{9F270B0E-58AF-48F5-86E4-53194B79360B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NavigationPageModal", "NavigationPageModal\NavigationPageModal.csproj", "{1A17D5AD-6747-494C-91DF-7B3BB3C81868}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NavigationPageNoModal", "NavigationPageNoModal\NavigationPageNoModal.csproj", "{3CED972D-7DAD-41EF-BF95-1C5E63054989}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,9 +55,25 @@ Global
 		{62AA8905-174D-4397-A549-A68BB579F056}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{62AA8905-174D-4397-A549-A68BB579F056}.Release|Any CPU.Build.0 = Release|Any CPU
 		{62AA8905-174D-4397-A549-A68BB579F056}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{1A17D5AD-6747-494C-91DF-7B3BB3C81868}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A17D5AD-6747-494C-91DF-7B3BB3C81868}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A17D5AD-6747-494C-91DF-7B3BB3C81868}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{1A17D5AD-6747-494C-91DF-7B3BB3C81868}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A17D5AD-6747-494C-91DF-7B3BB3C81868}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A17D5AD-6747-494C-91DF-7B3BB3C81868}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{3CED972D-7DAD-41EF-BF95-1C5E63054989}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CED972D-7DAD-41EF-BF95-1C5E63054989}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CED972D-7DAD-41EF-BF95-1C5E63054989}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{3CED972D-7DAD-41EF-BF95-1C5E63054989}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CED972D-7DAD-41EF-BF95-1C5E63054989}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3CED972D-7DAD-41EF-BF95-1C5E63054989}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{07DA629B-3A5F-429D-903D-B79434F8BA5A} = {9F270B0E-58AF-48F5-86E4-53194B79360B}
+		{62AA8905-174D-4397-A549-A68BB579F056} = {9F270B0E-58AF-48F5-86E4-53194B79360B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {10E80998-7D1E-4CB3-86DA-057455F057E5}
