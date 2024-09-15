@@ -57,6 +57,8 @@ videos
 https://www.youtube.com/watch?v=ePbQC28hbiA
 
 
+fundamentos
+https://www.youtube.com/watch?v=fMvTwl3U1eo
 
 
 

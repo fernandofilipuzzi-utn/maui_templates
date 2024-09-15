@@ -2,6 +2,7 @@
 using Plugin.BLE;
 using Plugin.BLE.Abstractions;
 using Plugin.BLE.Abstractions.Contracts;
+using Plugin.BLE.Abstractions.EventArgs;
 using System.Text;
 
 namespace MauiBlueTooth
@@ -9,14 +10,14 @@ namespace MauiBlueTooth
     public partial class MainPage : ContentPage
     {
         IAdapter adapter = null;
-        IServiceCollection service = null;
+        IService service = null;
         ICharacteristic characteristicUpdate = null;
         ICharacteristic characteristicWrite = null;
 
-        string deviceId =               "00000000-0000-00000-0000-546c0e594305";
-        string serviceId =              "0000fff0-0000-10000-8000-00805f9b34fb";
-        string characteristicUpdateId = "0000fff4-0000-10000-8000-00805f9b34fb";
-        string characteristicWriteId =  "0000fff1-0000-10000-8000-00805f9b34fb";
+        string deviceId =               "00000000-0000-0000-0000-546c0e594305";
+        string serviceId =              "0000fff0-0000-1000-8000-00805f9b34fb";
+        string characteristicUpdateId = "0000fff4-0000-1000-8000-00805f9b34fb";
+        string characteristicWriteId =  "0000fff1-0000-1000-8000-00805f9b34fb";
 
 
         public MainPage()
@@ -51,7 +52,7 @@ namespace MauiBlueTooth
             lblError.Text = status;
         }
 
-        private void SetButtonText(ToolbarItem btn, string text)
+        private void SetButtonText(Button btn, string text)
         { 
             btn.Text = text;
         }
@@ -106,8 +107,6 @@ namespace MauiBlueTooth
         {
             try
             {
-
-
                 if (BtnStartStop.Text.Equals("Stop"))
                 {
                     StopUpdates();
@@ -154,7 +153,6 @@ namespace MauiBlueTooth
             return ok;
         }
 
-
         private async Task<bool> FindCharacteristics()
         {
             bool ok = false;
@@ -162,7 +160,11 @@ namespace MauiBlueTooth
             {
                 MainThread.BeginInvokeOnMainThread(() => SetStatusText("Finding characteristics..."));
 
-                Task<ICharacteristic> tasks=new Task<ICharacteristic>[] { service.GetCharactertisticAsync(characteristicUpdateId)}:
+                Task<ICharacteristic>[] tasks = new Task<ICharacteristic>[] 
+                                                { 
+                                                   service.GetCharacteristicAsync( Guid.Parse(characteristicUpdateId)), 
+                                                   service.GetCharacteristicAsync( Guid.Parse(characteristicWriteId)) 
+                                                };
 
                 var completeTasks = await Task.WhenAll(tasks);
 
@@ -174,7 +176,7 @@ namespace MauiBlueTooth
                     MainThread.BeginInvokeOnMainThread(() => SetStatusText("Characteristics found."));
                     MainThread.BeginInvokeOnMainThread(() => SetStatusText("Preparing event handler..."));
 
-                    characteristicUpdate.ValueUpdated += (sender, args) =>
+                    characteristicUpdate.ValueUpdated += (s, e) =>
                     {
                         try
                         {
@@ -202,7 +204,6 @@ namespace MauiBlueTooth
             return ok;
         }
 
-
         private void StartUpdates()
         {
             try
@@ -221,12 +222,41 @@ namespace MauiBlueTooth
         }
 
         private async void StopUpdates()
-        { 
+        {
+            try
+            {
+                lblError.Text = "Stopping updates....";
+
+                await characteristicWrite.WriteAsync(ASCIIEncoding.ASCII.GetBytes("Stop Update"));
+
+                try
+                {
+                    await characteristicUpdate.StartUpdatesAsync();
+                }
+                catch (Exception ex)
+                {
+                    if (ex.Message.StartsWith("GATT: Write"))
+                    { 
+                    }
+                }
+
+                service = null;
+                characteristicUpdate = null;
+                characteristicWrite = null;
+
+                lblError.Text = "Updates stopped";
+
+                BtnStartStop.Text = "Start";
+            }
+            catch (Exception ex) 
+            {
+                lblError.Text = ex.Message;
+            }
         }
 
         private void btnConnectDisconnect_Clicked(object sender, EventArgs e)
         {
-            if (btnConnectDisconnect.IsEnabled)
+            if (btnConnectDisconnect.Text=="Connect")
             {
                 ConnectDevice();
             }
@@ -236,9 +266,40 @@ namespace MauiBlueTooth
             }
         }
 
-        private void BtnStartStop_Clicked(object sender, EventArgs e)
+        private async void BtnStartStop_Clicked(object sender, EventArgs e)
         {
+            if (BtnStartStop.Text=="Start")
+            {
+                if (await FindService())
+                {
+                    if (await FindCharacteristics())
+                    {
+                        StartUpdates();
+                    }
+                }
+            }
+            else 
+            {
+                StopUpdates();
+            }
+        }
 
+        private void S_ValueUpdate(object sender, CharacteristicUpdatedEventArgs e)
+        {
+            try
+            {
+                var bytes = e.Characteristic.Value;
+                var receivedData = Encoding.ASCII.GetString(bytes);
+
+                MainThread.BeginInvokeOnMainThread(() =>
+                {
+                    lblError.Text = $"Data received: {receivedData}";
+                });
+            }
+            catch (Exception ex)
+            {
+                MainThread.BeginInvokeOnMainThread(() => SetStatusText(ex.Message));
+            }
         }
     }
 
