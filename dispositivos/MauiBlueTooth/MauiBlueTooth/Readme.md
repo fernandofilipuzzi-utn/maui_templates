@@ -49,6 +49,26 @@ https://github.com/afriscic/BarcodeScanning.Native.Maui/tree/master/BarcodeScann
 https://github.com/afriscic/BarcodeScanning.Native.Maui/blob/master/BarcodeScanning.Test/ScanTab.xaml.cs
 
 
+siguiendo a este
+https://github.com/dotnet-bluetooth-le/dotnet-bluetooth-le
+
+
+videos
+https://www.youtube.com/watch?v=ePbQC28hbiA
+
+
+
+
+
+
 este video me da error de java
 https://www.youtube.com/watch?v=WWP2t-B5ADU
 https://github.com/xamarin/GooglePlayServicesComponents/issues/872
+
+
+https://learn.microsoft.com/es-es/dotnet/maui/tutorials/notes-app/?view=net-maui-8.0
+
+https://github.com/dotnet-bluetooth-le/dotnet-bluetooth-le
+
+
+dotnet add package Plugin.BLE --prerelease -s=https://api.nuget.org/v3/index.json
