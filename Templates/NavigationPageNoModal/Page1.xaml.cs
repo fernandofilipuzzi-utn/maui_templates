@@ -44,7 +44,7 @@ namespace NavigationPageNoModal
             Dispatcher.Dispatch(async () =>
             {
                 await DisplayAlert("Result", ParametroValor, "OK");
-                await Shell.Current.GoToAsync(".."); // Volver a la página anterior
+                await Shell.Current.GoToAsync(".."); //vuelve a la página anterior
             });
         }
     }
