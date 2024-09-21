@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiPermisos.MainPage">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="30,0" Spacing="25">
+                <Button
+                    x:Name="btnPermisoIndividual"
+                    Text="Solicitar Permiso Individual" 
+                    SemanticProperties.Hint="Permisos Individualizado"
+                    Clicked="OnBtnPermisoIndividualClicked"
+                    HorizontalOptions="Fill" />
+
+                 <Button
+                    x:Name="btnPermisosPersonalizados"
+                    Text="Solicitar Permisos Personalizados" 
+                    SemanticProperties.Hint="Permisos Personalizados"
+                    Clicked="OnBtnPermisosPersonalizadosClicked"
+                    HorizontalOptions="Fill" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
