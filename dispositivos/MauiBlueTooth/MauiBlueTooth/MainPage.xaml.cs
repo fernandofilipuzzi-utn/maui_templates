@@ -1,306 +1,121 @@
-﻿
+﻿using MauiBlueTooth.Helpers;
 using Plugin.BLE;
-using Plugin.BLE.Abstractions;
 using Plugin.BLE.Abstractions.Contracts;
-using Plugin.BLE.Abstractions.EventArgs;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Text;
-
 namespace MauiBlueTooth
 {
     public partial class MainPage : ContentPage
     {
-        IAdapter adapter = null;
-        IService service = null;
-        ICharacteristic characteristicUpdate = null;
-        ICharacteristic characteristicWrite = null;
-
-        string deviceId =               "00000000-0000-0000-0000-546c0e594305";
-        string serviceId =              "0000fff0-0000-1000-8000-00805f9b34fb";
-        string characteristicUpdateId = "0000fff4-0000-1000-8000-00805f9b34fb";
-        string characteristicWriteId =  "0000fff1-0000-1000-8000-00805f9b34fb";
-
+        private IAdapter _adapter;
+        private IBluetoothLE _ble;
+        private IDevice selectedDevice;
+        private List<IDevice> _gattDevices = new List<IDevice>();
+        private List<IService> _services;
 
         public MainPage()
         {
             InitializeComponent();
-
-            RequestPermissions();
-
-            adapter = CrossBluetoothLE.Current.Adapter;
-
-            adapter.DeviceConnected += async (s, e) =>
-            {
-                MainThread.BeginInvokeOnMainThread(() => SetStatusText("Connect."));
-                MainThread.BeginInvokeOnMainThread(() => SetButtonText(btnConnectDisconnect, "Disconnect"));
-            };
-
-            adapter.DeviceDisconnected += async (s, e) =>
-            {
-                MainThread.BeginInvokeOnMainThread(() => SetStatusText("Disconnect."));
-                MainThread.BeginInvokeOnMainThread(() => SetButtonText(btnConnectDisconnect, "Connect"));
-            };
-
-            var ble = CrossBluetoothLE.Current;
-
-            var state = ble.State;
-
-            ble.StateChanged += (s, e) => { };
         }
 
-        private void SetStatusText(string status) 
+        private async void btnScan_Clicked(object sender, EventArgs e)
         {
-            lblError.Text = status;
-        }
-
-        private void SetButtonText(Button btn, string text)
-        { 
-            btn.Text = text;
-        }
-
-        private async void RequestPermissions()
-        {
-            PermissionStatus status = await Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>();
-
+            var status = new CustomPermissionsHelper().RequestAllPermissionsAsync().Result;
             if (status != PermissionStatus.Granted)
-            { 
-                status=await Permissions.RequestAsync<Permissions.LocationWhenInUse>();
+            {
+                return;
+            }
+
+            //si esta encendido 
+            _ble = CrossBluetoothLE.Current;
+            _ble.StateChanged += (s, e) =>
+            {
+                Debug.WriteLine($"The bluetooth state changed to {e.NewState}");
+                lbStatus.Text = _ble.IsOn == false ? "bluetooth on" : "bluetooth off";
+            };
+
+            _adapter = CrossBluetoothLE.Current.Adapter;
+
+            _adapter.ScanMode = ScanMode.Balanced;
+            _adapter.ScanMatchMode = ScanMatchMode.AGRESSIVE;
+
+            _gattDevices = new List<IDevice>();
+
+            _adapter.DeviceDiscovered += (s, a) =>
+            {
+                _gattDevices.Add(a.Device);
+                Debug.WriteLine($"Dispositivo encontrado: {a.Device.Name} - {a.Device.Id}");
+
+                lbStatus.Text += $"Dispositivo encontrado: {a.Device.Name} - {a.Device.Id}";
+
+                listView.ItemsSource = _gattDevices.ToArray();
+
+                //    Dispatcher.Dispatch(() =>
+                //    {
+                //        listView.ItemsSource = null;
+                //        listView.ItemsSource = _gattDevices.ToArray();
+                //    });
+            };
+
+            if (_ble.IsAvailable == false || _ble.IsOn == false)
+            {
+                await DisplayAlert("Error", "Bluetooth is not available or enabled.", "OK");
+                return;
+            }
+
+            lbStatus.Text += $"Escaneando...";
+            await _adapter.StartScanningForDevicesAsync();
+            lbStatus.Text += $"Find de escaneado...";
+
+            var devices = _adapter.GetSystemConnectedOrPairedDevices().ToList();
+
+            listView.ItemsSource = devices;
+        }
+
+        private async void listView_ItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            var selectedDevice = e.Item as IDevice;
+            if (selectedDevice != null)
+            {
+                _adapter?.ConnectToDeviceAsync(selectedDevice);
+                await DisplayAlert("Connection done!", $"Connected to {selectedDevice.Name}", "Ok");
+
+
+                var services = await selectedDevice.GetServicesAsync();
+
+                _services = new List<IService>();
+                foreach (var service in services)
+                {
+                    _services.Add(service );
+                }
+                listView1.ItemsSource = _services.ToArray();
             }
         }
 
-        private async void ConnectDevice()
+        private async void listView1_ItemTapped(object sender, ItemTappedEventArgs e)
         {
-            try
+            var selectedService = e.Item as IService;
+            if (selectedService != null)
             {
-                var ble = CrossBluetoothLE.Current;
 
-                if (ble.State == BluetoothState.On)
-                {
-                    var adapter = CrossBluetoothLE.Current.Adapter;
-                    adapter.ScanTimeout = 5000;
-
-                    var permissionStatus = await Permissions.CheckStatusAsync<BluetoothPermission>();
-
-                    if (permissionStatus == PermissionStatus.Granted)
-                    {
-                        lblError.Text = "Searching for device...";
-                        CancellationToken cancel = new CancellationToken();
-
-                        adapter.ConnectToKnownDeviceAsync(Guid.Parse(deviceId), new ConnectParameters(true), cancel);
-                    }
-                    else
-                    {
-                        await Permissions.RequestAsync<BluetoothPermission>();
-                    }
-                }
-                else
-                {
-                    lblError.Text = "Bluetooth is not on";
-                }
-            }
-            catch (Exception ex)
-            { 
-                lblError.Text = ex.Message;
-            }
-        }
-
-        private async void DisconnectDevice()
-        {
-            try
-            {
-                if (BtnStartStop.Text.Equals("Stop"))
-                {
-                    StopUpdates();
-                }
+                var _characteristics = await selectedService.GetCharacteristicsAsync();
                  
-                lblError.Text = "Attempting to disconnect...";
+                listView2.ItemsSource = _characteristics.ToArray();
+            }
+        }
 
-                adapter.DisconnectDeviceAsync(adapter.ConnectedDevices[0]);
+        private async void listView2_ItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            var selectedCharacteric = e.Item as ICharacteristic;
+            if (selectedCharacteric != null)
+            {
+
+                await selectedCharacteric.WriteAsync(Encoding.UTF8.GetBytes("1"));
+
                 
-            }
-            catch (Exception ex)
-            {
-                lblError.Text = ex.Message;
-            }
-        }
-
-        private async Task<bool> FindService()
-        {
-            bool ok = false;
-            try
-            {
-                MainThread.BeginInvokeOnMainThread(() => SetStatusText("Finding correct service..."));
-
-                CancellationToken cancel = new CancellationToken();
-
-                service = await adapter.ConnectedDevices[0].GetServiceAsync(Guid.Parse(serviceId), cancel);
-
-                if (service != null)
-                {
-                    MainThread.BeginInvokeOnMainThread(() => SetStatusText("Service found."));
-                    ok = true;
-                }
-                else
-                {
-                    MainThread.BeginInvokeOnMainThread(() => SetStatusText("Service not found."));
-                    ok = true;
-                }
-            }
-            catch (Exception ex)
-            {
-                MainThread.BeginInvokeOnMainThread(() => SetStatusText(ex.Message));
-            }
-
-            return ok;
-        }
-
-        private async Task<bool> FindCharacteristics()
-        {
-            bool ok = false;
-            try
-            {
-                MainThread.BeginInvokeOnMainThread(() => SetStatusText("Finding characteristics..."));
-
-                Task<ICharacteristic>[] tasks = new Task<ICharacteristic>[] 
-                                                { 
-                                                   service.GetCharacteristicAsync( Guid.Parse(characteristicUpdateId)), 
-                                                   service.GetCharacteristicAsync( Guid.Parse(characteristicWriteId)) 
-                                                };
-
-                var completeTasks = await Task.WhenAll(tasks);
-
-                characteristicUpdate = completeTasks[0];
-                characteristicWrite = completeTasks[1];
-
-                if (characteristicUpdate != null && characteristicWrite != null)
-                {
-                    MainThread.BeginInvokeOnMainThread(() => SetStatusText("Characteristics found."));
-                    MainThread.BeginInvokeOnMainThread(() => SetStatusText("Preparing event handler..."));
-
-                    characteristicUpdate.ValueUpdated += (s, e) =>
-                    {
-                        try
-                        {
-                            S_ValueUpdate(s, e);
-                        }
-                        catch (Exception ex)
-                        {
-                            MainThread.BeginInvokeOnMainThread(() => SetStatusText(ex.Message));
-                        }
-                    };
-
-                    ok = true;
-                }
-                else 
-                {
-                    MainThread.BeginInvokeOnMainThread(() => SetStatusText("Characterics not found."));
-                    ok = true;
-                }
-            }
-            catch (Exception ex)
-            {
-                MainThread.BeginInvokeOnMainThread(() => SetStatusText(ex.Message));
-            }
-
-            return ok;
-        }
-
-        private void StartUpdates()
-        {
-            try
-            {
-                MainThread.BeginInvokeOnMainThread(() => SetButtonText(BtnStartStop,"Stop"));
-                MainThread.BeginInvokeOnMainThread(() => SetStatusText("Listenning...."));
-
-                characteristicWrite.WriteAsync(ASCIIEncoding.ASCII.GetBytes("Start Updates"));
-
-                characteristicWrite.StartUpdatesAsync();
-            }
-            catch (Exception ex)
-            {
-                MainThread.BeginInvokeOnMainThread(() => SetStatusText(ex.Message));
-            }
-        }
-
-        private async void StopUpdates()
-        {
-            try
-            {
-                lblError.Text = "Stopping updates....";
-
-                await characteristicWrite.WriteAsync(ASCIIEncoding.ASCII.GetBytes("Stop Update"));
-
-                try
-                {
-                    await characteristicUpdate.StartUpdatesAsync();
-                }
-                catch (Exception ex)
-                {
-                    if (ex.Message.StartsWith("GATT: Write"))
-                    { 
-                    }
-                }
-
-                service = null;
-                characteristicUpdate = null;
-                characteristicWrite = null;
-
-                lblError.Text = "Updates stopped";
-
-                BtnStartStop.Text = "Start";
-            }
-            catch (Exception ex) 
-            {
-                lblError.Text = ex.Message;
-            }
-        }
-
-        private void btnConnectDisconnect_Clicked(object sender, EventArgs e)
-        {
-            if (btnConnectDisconnect.Text=="Connect")
-            {
-                ConnectDevice();
-            }
-            else
-            { 
-                DisconnectDevice();
-            }
-        }
-
-        private async void BtnStartStop_Clicked(object sender, EventArgs e)
-        {
-            if (BtnStartStop.Text=="Start")
-            {
-                if (await FindService())
-                {
-                    if (await FindCharacteristics())
-                    {
-                        StartUpdates();
-                    }
-                }
-            }
-            else 
-            {
-                StopUpdates();
-            }
-        }
-
-        private void S_ValueUpdate(object sender, CharacteristicUpdatedEventArgs e)
-        {
-            try
-            {
-                var bytes = e.Characteristic.Value;
-                var receivedData = Encoding.ASCII.GetString(bytes);
-
-                MainThread.BeginInvokeOnMainThread(() =>
-                {
-                    lblError.Text = $"Data received: {receivedData}";
-                });
-            }
-            catch (Exception ex)
-            {
-                MainThread.BeginInvokeOnMainThread(() => SetStatusText(ex.Message));
             }
         }
     }
-
 }
