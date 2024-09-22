@@ -1,11 +1,10 @@
-﻿using MauiBlueTooth.Helpers;
+﻿using MauiBluetooth.Helpers;
 using Plugin.BLE;
 using Plugin.BLE.Abstractions.Contracts;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Text;
-namespace MauiBlueTooth
+
+namespace MauiBluetooth
 {
     public partial class MainPage : ContentPage
     {

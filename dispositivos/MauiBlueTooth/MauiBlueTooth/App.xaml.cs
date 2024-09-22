@@ -1,4 +1,4 @@
-﻿namespace MauiBlueTooth
+﻿namespace MauiBluetooth
 {
     public partial class App : Application
     {

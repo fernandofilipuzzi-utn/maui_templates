@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 
-namespace MauiBlueTooth
+namespace MauiBluetooth
 {
     public static class MauiProgram
     {

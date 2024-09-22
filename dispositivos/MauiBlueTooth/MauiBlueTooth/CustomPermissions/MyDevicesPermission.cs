@@ -1,6 +1,6 @@
 ﻿using static Microsoft.Maui.ApplicationModel.Permissions;
 
-namespace MauiBlueTooth.CustomPermissions
+namespace MauiBluetooth.CustomPermissions
 {
     public class MyDevicesPermission : BasePlatformPermission
     {

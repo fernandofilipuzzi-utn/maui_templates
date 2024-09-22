@@ -1,7 +1,7 @@
 ﻿using ObjCRuntime;
 using UIKit;
 
-namespace MauiBlueTooth
+namespace MauiBluetooth
 {
     public class Program
     {

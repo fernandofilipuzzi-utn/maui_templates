@@ -1,6 +1,6 @@
-﻿using MauiBlueTooth.CustomPermissions;
+﻿using MauiBluetooth.CustomPermissions;
 
-namespace MauiBlueTooth.Helpers
+namespace MauiBluetooth.Helpers
 {
     public class CustomPermissionsHelper : IPermissionHelper
     {
