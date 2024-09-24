@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp1.MainPage">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30,0"
+            Spacing="25">
+            
+            <Label
+                x:Name="lbnHola"
+                Text="Hola!"
+                Style="{StaticResource SubHeadline}"
+                SemanticProperties.HeadingLevel="Level2"
+                SemanticProperties.Description="Ejemplo 1" />
+
+            <Image x:Name="myImage" 
+                  BackgroundColor="Gray"
+                  WidthRequest="300"
+                  HeightRequest="300"
+                  HorizontalOptions="Center" />
+
+            <Button
+                x:Name="btnTomarFoto"
+                Text="Tomar foto" 
+                SemanticProperties.Hint="Tomar foto"
+                Clicked="btnTomarFoto_Clicked"
+                HorizontalOptions="Fill" />
+
+
+            <Button
+                x:Name="btnIniciarLLamada"
+                Text="Iniciar LLamada" 
+                SemanticProperties.Hint="Iniciar llamada"
+                Clicked="btnIniciarLLamada_Clicked"
+                HorizontalOptions="Fill" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
