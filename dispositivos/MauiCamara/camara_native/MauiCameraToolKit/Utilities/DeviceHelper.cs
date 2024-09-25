@@ -1,7 +1,6 @@
 ﻿
-using MauiCamera.Utilities;
 
-namespace MauiCamera
+namespace MauiCameraToolKit.Utilities
 {
     public class DeviceHelper
     {
@@ -60,24 +59,25 @@ namespace MauiCamera
                     FileResult? photo = await MediaPicker.Default.CapturePhotoAsync(
                         new MediaPickerOptions()
                         {
-                            Title = "Foto",           
+                            Title = "Foto",
                         }
                     );
 
                     if (photo == null) return null;
 
                     //byte[]? imageBytes = await new SkiaSharpImageDevice()
-                    byte[]? imageBytes = await new SkiaSharpEXIFImageDevice()
-                    {
-                        MaxWidthHeight = 1000,
-                        CompressionQuality = 75,
-                        CustomPhotoSize = 50
-                    }.TakePhoto(photo);
+                    byte[]? imageBytes = await Task.Run(() =>
+                        new SkiaSharpEXIFImageDevice()
+                        {
+                            MaxWidthHeight = 1000,
+                            CompressionQuality = 75,
+                            CustomPhotoSize = 50
+                        }.TakePhoto(photo)
+                    );
+
                     if (imageBytes == null) return null;
 
-                   
                     return ImageSource.FromStream(() => new MemoryStream(imageBytes));
-                   
                 }
                 catch (Exception ex)
                 {

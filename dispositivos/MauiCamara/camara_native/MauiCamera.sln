@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34723.18
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MauiCamera", "MauiCamera\MauiCamera.csproj", "{5C2029FD-42EF-4901-96C8-7C85DC089F87}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MauiCameraResize", "MauiCameraResize\MauiCameraResize.csproj", "{1EC09795-DCDF-4378-AAB0-2AE7A2B10D99}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MauiCameraToolKit", "MauiCameraToolKit\MauiCameraToolKit.csproj", "{83705D09-AEF8-4557-BBFE-1C3F1747947B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,12 +13,18 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5C2029FD-42EF-4901-96C8-7C85DC089F87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5C2029FD-42EF-4901-96C8-7C85DC089F87}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5C2029FD-42EF-4901-96C8-7C85DC089F87}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{5C2029FD-42EF-4901-96C8-7C85DC089F87}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5C2029FD-42EF-4901-96C8-7C85DC089F87}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5C2029FD-42EF-4901-96C8-7C85DC089F87}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{1EC09795-DCDF-4378-AAB0-2AE7A2B10D99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1EC09795-DCDF-4378-AAB0-2AE7A2B10D99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1EC09795-DCDF-4378-AAB0-2AE7A2B10D99}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{1EC09795-DCDF-4378-AAB0-2AE7A2B10D99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1EC09795-DCDF-4378-AAB0-2AE7A2B10D99}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1EC09795-DCDF-4378-AAB0-2AE7A2B10D99}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{83705D09-AEF8-4557-BBFE-1C3F1747947B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83705D09-AEF8-4557-BBFE-1C3F1747947B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83705D09-AEF8-4557-BBFE-1C3F1747947B}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{83705D09-AEF8-4557-BBFE-1C3F1747947B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83705D09-AEF8-4557-BBFE-1C3F1747947B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83705D09-AEF8-4557-BBFE-1C3F1747947B}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

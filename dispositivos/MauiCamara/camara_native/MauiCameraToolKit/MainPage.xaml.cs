@@ -1,4 +1,6 @@
-﻿namespace MauiCamera
+﻿using MauiCameraToolKit.Utilities;
+
+namespace MauiCameraToolKit
 {
     public partial class MainPage : ContentPage
     {
@@ -12,18 +14,22 @@
 
         private async void btnFoto_Clicked(object sender, EventArgs e)
         {
-            lbnHola.Text = "Hola, Fernando!";
+            lbnEstado.Text = "Tomando una foto";
 
-            //string imagen=await _device.TakePhoto(this);
             var imagen = await _device.TakePhoto(this);
 
             if (imagen != null)
             {
-                myImage.Source = imagen;
+                Dispatcher.Dispatch(() =>
+                {
+                    myImage.Source = imagen;
+                });
                 await Shell.Current.DisplayAlert("Captura foto Realizada", "Resultado", "ok");
             }
             else
                 await Shell.Current.DisplayAlert("Error Captura de foto", "Error", "ok");
+
+            lbnEstado.Text = "Listo";
         }
     }
 

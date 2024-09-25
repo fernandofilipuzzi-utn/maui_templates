@@ -1,17 +1,10 @@
 ﻿using MetadataExtractor.Formats.Exif;
 using MetadataExtractor;
 using SkiaSharp;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SixLabors.ImageSharp.Metadata.Profiles.Exif;
 using SixLabors.ImageSharp.Formats.Jpeg;
-using ImageMagick;
 using ExifTag = SixLabors.ImageSharp.Metadata.Profiles.Exif.ExifTag;
 
-namespace MauiCamera.Utilities
+namespace MauiCameraResize.Utilities
 {
     public class SkiaSharpEXIFImageDevice : IImageDevice
     {
