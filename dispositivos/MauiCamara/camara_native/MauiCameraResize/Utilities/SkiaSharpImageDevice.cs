@@ -2,6 +2,12 @@
 
 namespace MauiCameraResize.Utilities
 {
+    /*
+     lee la orientación de la imagen original desde el exif y lueg
+     genera una imagen nueva , con una nueva escala y rotada según el exif original
+
+     nota: a diferencia de inyectar el exif en la nueva imagen , en este es mucho mas rapido
+     */
     public class SkiaSharpImageDevice : IImageDevice
     {
         public int MaxWidthHeight { get; set; } = 1000;

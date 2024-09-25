@@ -4,6 +4,13 @@ using SkiaSharp;
 using SixLabors.ImageSharp.Formats.Jpeg;
 using ExifTag = SixLabors.ImageSharp.Metadata.Profiles.Exif.ExifTag;
 
+/*
+    conserva  exif -solo la orientacion
+
+    pero demora mucho la escritura del exif
+ */
+
+
 namespace MauiCameraResize.Utilities
 {
     public class SkiaSharpEXIFImageDevice : IImageDevice
@@ -19,17 +26,19 @@ namespace MauiCameraResize.Utilities
             byte[]? imageData = null;
             int? originalOrientation = null;
 
+            #region extrae la orientación desde el exif
             using (var sphoto = await simagen.OpenReadAsync())
             {
                 var directories = ImageMetadataReader.ReadMetadata(sphoto);
-
                 var exifDirectory = directories.OfType<ExifIfd0Directory>().FirstOrDefault();
                 if (exifDirectory != null && exifDirectory.TryGetInt32(ExifDirectoryBase.TagOrientation, out var orientation))
                 {
                     originalOrientation = orientation;
                 }
             }
+            #endregion
 
+            #region escala la imagen
             using (var sphoto = await simagen.OpenReadAsync())
             {
                 using (SKBitmap originalBitmap = SKBitmap.Decode(sphoto))
@@ -53,7 +62,9 @@ namespace MauiCameraResize.Utilities
                     }
                 }
             }
-                        
+            #endregion
+
+            #region escribe solo orientacion de la imagen original
             if (imageData != null && originalOrientation.HasValue)
             {
                 using (var imageSharpImage = SixLabors.ImageSharp.Image.Load(imageData))
@@ -62,8 +73,7 @@ namespace MauiCameraResize.Utilities
                     {
                         imageSharpImage.Metadata.ExifProfile = new SixLabors.ImageSharp.Metadata.Profiles.Exif.ExifProfile();
                         imageSharpImage.Metadata.ExifProfile.SetValue(ExifTag.Orientation, (ushort)originalOrientation.Value);
-
- 
+                         
                         using (var ms = new MemoryStream())
                         {
                             imageSharpImage.Save(ms, new JpegEncoder
@@ -74,9 +84,9 @@ namespace MauiCameraResize.Utilities
                         }
                     }
                 }
-
                 return imageData;
             }
+            #endregion
 
             return imageData;
         }

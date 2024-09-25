@@ -16,7 +16,6 @@ namespace MauiCameraResize
         {
             lbnEstado.Text = "Tomando una foto";
 
-            //string imagen=await _device.TakePhoto(this);
             var imagen = await _device.TakePhoto(this);
 
             if (imagen != null)

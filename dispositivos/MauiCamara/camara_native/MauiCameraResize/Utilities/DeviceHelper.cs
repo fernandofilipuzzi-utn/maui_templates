@@ -66,9 +66,9 @@ namespace MauiCameraResize.Utilities
 
                     if (photo == null) return null;
 
-                    //byte[]? imageBytes = await new SkiaSharpImageDevice()
+                    /*lo corro en un hilo porque si tarda voltea la aplicación*/
                     byte[]? imageBytes = await Task.Run(() =>
-                        new SkiaSharpEXIFImageDevice()
+                        new SkiaSharpEXIFRotateImageDevice()//esta
                         {
                             MaxWidthHeight = 1000,
                             CompressionQuality = 75,
