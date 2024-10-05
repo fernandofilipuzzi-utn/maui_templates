@@ -10,10 +10,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{49927F12-B
 		Readme.md = Readme.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MauiScanDevicesBluetooth", "MauiScanDevicesBluetooth\MauiScanDevicesBluetooth.csproj", "{EE4B8B56-823B-4E0B-9A3B-99D5355D5416}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MauiViewDeviceBluetooth", "MauiViewDeviceBluetooth\MauiViewDeviceBluetooth.csproj", "{77799E6C-8267-4F94-9434-A7CBD07E3BC9}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,18 +22,6 @@ Global
 		{97986B46-CFF8-4685-84F7-C20E461B7C93}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{97986B46-CFF8-4685-84F7-C20E461B7C93}.Release|Any CPU.Build.0 = Release|Any CPU
 		{97986B46-CFF8-4685-84F7-C20E461B7C93}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{EE4B8B56-823B-4E0B-9A3B-99D5355D5416}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EE4B8B56-823B-4E0B-9A3B-99D5355D5416}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EE4B8B56-823B-4E0B-9A3B-99D5355D5416}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{EE4B8B56-823B-4E0B-9A3B-99D5355D5416}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EE4B8B56-823B-4E0B-9A3B-99D5355D5416}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EE4B8B56-823B-4E0B-9A3B-99D5355D5416}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{77799E6C-8267-4F94-9434-A7CBD07E3BC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{77799E6C-8267-4F94-9434-A7CBD07E3BC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{77799E6C-8267-4F94-9434-A7CBD07E3BC9}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{77799E6C-8267-4F94-9434-A7CBD07E3BC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{77799E6C-8267-4F94-9434-A7CBD07E3BC9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{77799E6C-8267-4F94-9434-A7CBD07E3BC9}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
