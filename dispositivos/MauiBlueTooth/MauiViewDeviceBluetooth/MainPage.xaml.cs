@@ -6,30 +6,37 @@ using MauiViewDeviceBluetooth.Helpers;
 using System.Text;
 using Plugin.BLE.Abstractions;
 using System.Windows.Input;
+using Microsoft.Maui.Devices;
+using System.Globalization;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace MauiViewDeviceBluetooth
 {
     public partial class MainPage : ContentPage
     {
-        private readonly IAdapter _bluetoothAdapter;
-        private ObservableCollection<BluetoothDeviceViewModel> _discoveredDevices;
+        private IAdapter _bluetoothAdapter;
+        private ObservableCollection<BluetoothDeviceViewModel> DiscoveredDevices { get; set; } = new ObservableCollection<BluetoothDeviceViewModel>();
 
         public MainPage()
         {
             InitializeComponent();
 
-            _bluetoothAdapter = CrossBluetoothLE.Current.Adapter;
-            _discoveredDevices = new ObservableCollection<BluetoothDeviceViewModel>();
-            deviceListView.ItemsSource = _discoveredDevices;
+            InitializeBluetooth();
+        }
 
-            // Inicializar el evento una vez
+        private void InitializeBluetooth()
+        {
+            _bluetoothAdapter = CrossBluetoothLE.Current.Adapter;
+          //  DiscoveredDevices = new ObservableCollection<BluetoothDeviceViewModel>();
+              deviceListView.ItemsSource = DiscoveredDevices;
+
             _bluetoothAdapter.DeviceDiscovered += BluetoothAdapter_DeviceDiscovered;
         }
 
         private async void OnScanButtonClicked(object sender, EventArgs e)
         {
-            // Limpiar la lista de dispositivos descubiertos
-            _discoveredDevices.Clear();
+            DiscoveredDevices.Clear();
 
             var status = await new CustomPermissionsHelper().RequestAllPermissionsAsync();
             if (status != PermissionStatus.Granted)
@@ -63,108 +70,132 @@ namespace MauiViewDeviceBluetooth
                 }
             }
 
-            // Verifica si el dispositivo ya ha sido descubierto
-            if (!_discoveredDevices.Any(d => d.Address == macAddress))
+            # region descubre los dispositivos
+            if (!DiscoveredDevices.Any(d => d.Address == macAddress))
             {
                 var newDevice = new BluetoothDeviceViewModel
                 {
                     Name = deviceInfo.Name ?? $"Dispositivo Desconocido",
                     IdString = $"{deviceEventArgs.Device.Id}",
                     Rssi = deviceInfo.Rssi.ToString(),
-                    Address = macAddress
+                    Address = macAddress,
+                    DeviceInfo= deviceInfo
                 };
-
-                // Conectar al dispositivo
-                try
-                {
-                    await _bluetoothAdapter.ConnectToDeviceAsync(deviceInfo);
-                    // Ahora intenta obtener los servicios del dispositivo conectado
-                    var services = await deviceInfo.GetServicesAsync();
-                    foreach (var service in services)
-                    {
-                        var newService = new BluetoothServiceViewModel
-                        {
-                            Name = service.Name,
-                            Id = service.Id.ToString()
-                        };
-
-                        // Obtener características de cada servicio
-                        var characteristics = await service.GetCharacteristicsAsync();
-                        foreach (var characteristic in characteristics)
-                        {
-                            var characteristicViewModel = new BluetoothCharacteristicViewModel(characteristic);
-                            newService.Characteristics.Add(characteristicViewModel);
-                        }
-
-                        newDevice.Services.Add(newService);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    // Maneja cualquier excepción que pueda ocurrir al conectar o al obtener servicios
-                    await DisplayAlert("Error", $"No se pudo conectar al dispositivo: {ex.Message}", "OK");
-                }
-
-                // Agregar el dispositivo a la lista después de intentar conectarse y obtener servicios
-                _discoveredDevices.Add(newDevice);
+                                
+                DiscoveredDevices.Add(newDevice);
             }
+            #endregion
         }
 
-        public ICommand SendValueCommand => new Command<BluetoothCharacteristicViewModel>(async (characteristic) =>
+        private async Task SendValueToCharacteristicAsync(BluetoothCharacteristicViewModel characteristic, string value)
         {
             if (characteristic.CanWrite)
             {
-                // Aquí puedes obtener el valor del Entry relacionado
-                var valueToSend = "1"; // Reemplaza esto con el valor ingresado en el Entry
-
-                // Escribe el valor en la característica
+                var valueToSend = "1";
                 await characteristic.Characteristic.WriteAsync(Encoding.UTF8.GetBytes(valueToSend));
             }
-        });
-        /*
-        private async void CharacteristicListView_ItemTapped(object sender, ItemTappedEventArgs e)
-        {
-            var selectedCharacteristic = e.Item as BluetoothCharacteristicViewModel;
-            if (selectedCharacteristic != null)
-            {
-                // Obtener la característica real desde el dispositivo
-                var service = (sender as ListView).BindingContext as BluetoothServiceViewModel;
-                var device = (service.BindingContext as BluetoothDeviceViewModel);
-                var characteristic = await device.Device.GetCharacteristicAsync(selectedCharacteristic.Id);
-
-                if (characteristic != null)
-                {
-                    // Escribir datos en la característica
-                    await characteristic.WriteAsync(Encoding.UTF8.GetBytes("1"));
-                }
-            }
-
-         var selectedCharacteric = e.Item as ICharacteristic;
-            if (selectedCharacteric != null)
-            {
-
-                await selectedCharacteric.WriteAsync(Encoding.UTF8.GetBytes("1"));
-
-                
-            }
-        */
+        }
     }
 
-    public class BluetoothDeviceViewModel
+    public class BluetoothDeviceViewModel : INotifyPropertyChanged
     {
         public string Name { get; set; }
         public string IdString { get; set; } 
         public string Rssi { get; set; } 
         public string Address { get; set; }
+        bool _isConnected;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public bool IsConnected
+        {
+            get { return _isConnected; }
+            set
+            {
+                if (_isConnected != value)
+                {
+                    _isConnected = value;
+                     OnPropertyChanged(nameof(IsConnected)); // Notificación de cambio
+                }
+            }
+        }
+        public IDevice DeviceInfo { get; set; }
+        
         public ObservableCollection<BluetoothServiceViewModel> Services { get; set; } = new ObservableCollection<BluetoothServiceViewModel>(); // Lista de servicios
+
+        public ICommand ConnectDisconnectCommand => new Command<BluetoothDeviceViewModel>(async (device) =>
+        {
+            if (device.IsConnected)
+            {
+                await DisconnectDeviceAsync(device);
+            }
+            else
+            {
+                await ConnectDeviceAsync(device);
+            }
+        });
+
+        private async Task ConnectDeviceAsync(BluetoothDeviceViewModel device)
+        {
+            try
+            {
+                var deviceInfo = device.DeviceInfo;
+                await CrossBluetoothLE.Current.Adapter.ConnectToDeviceAsync(deviceInfo);
+                device.IsConnected = true;
+
+                #region descubre los servicios y caracteristicas
+                var services = await deviceInfo.GetServicesAsync();
+                foreach (var service in services)
+                {
+                    var newService = new BluetoothServiceViewModel
+                    {
+                        Name = service.Name,
+                        Id = service.Id.ToString()
+                    };
+
+                    var characteristics = await service.GetCharacteristicsAsync();
+                    foreach (var characteristic in characteristics)
+                    {
+                        var characteristicViewModel = new BluetoothCharacteristicViewModel(characteristic);
+                        newService.Characteristics.Add(characteristicViewModel);
+                    }
+
+                    device.Services.Add(newService);
+                }
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                // Maneja cualquier excepción que pueda ocurrir al conectar o al obtener servicios
+               // await DisplayAlert("Error", $"No se pudo conectar al dispositivo: {ex.Message}", "OK");
+            }
+        }
+
+        private async Task DisconnectDeviceAsync(BluetoothDeviceViewModel device)
+        {
+            device.IsConnected = false;
+        }
+    }
+
+    public class BluetoothDevice
+    {
+        public string Name { get; set; }
+        public string IdString { get; set; }
+        public int Rssi { get; set; }
+        public string Address { get; set; }
     }
 
     public class BluetoothServiceViewModel
     {
         string name;
-        public string Name { get { return $"Service: {name}"; } set { name = value; } } // Nombre del servicio
-        public string Id { get; set; } // ID del servicio
-        public ObservableCollection<BluetoothCharacteristicViewModel> Characteristics { get; set; } = new ObservableCollection<BluetoothCharacteristicViewModel>(); // Lista de características
+        public string Name { get { return $"Service: {name}"; } set { name = value; } } 
+        public string Id { get; set; }
+        public ObservableCollection<BluetoothCharacteristicViewModel> Characteristics { get; set; } = new ObservableCollection<BluetoothCharacteristicViewModel>(); 
     }
 
     public class BluetoothCharacteristicViewModel
@@ -172,22 +203,18 @@ namespace MauiViewDeviceBluetooth
         private string _name;
         public string Name
         {
-            get => $"Characteristic: {_name}"; // Formateo del nombre de la característica
+            get => $"Characteristic: {_name}"; 
             set => _name = value;
         }
+        public string Id { get; set; }
+        public string Uuid { get; set; }
 
-        public string Id { get; set; } // ID de la característica
+        public ICharacteristic Characteristic { get; set; } 
 
-        public string Uuid { get; set; } // UUID de la característica
+        public bool CanRead { get; set; }
+        public bool CanWrite { get; set; }
+        public bool CanNotify { get; set; } 
 
-        public ICharacteristic Characteristic { get; set; } // Propiedad de referencia a la característica
-
-        // Propiedades adicionales
-        public bool CanRead { get; set; } // Indica si la característica se puede leer
-        public bool CanWrite { get; set; } // Indica si la característica se puede escribir
-        public bool CanNotify { get; set; } // Indica si la característica tiene notificaciones
-
-        // Constructor para inicializar propiedades
         public BluetoothCharacteristicViewModel(ICharacteristic characteristic)
         {
             Characteristic = characteristic;
@@ -197,8 +224,31 @@ namespace MauiViewDeviceBluetooth
 
             // Inicializa las capacidades de la característica
             CanRead = characteristic.Properties.HasFlag(CharacteristicPropertyType.Read);
-            CanWrite = characteristic.Properties.HasFlag(CharacteristicPropertyType.Write);
+            CanWrite = characteristic.Properties.HasFlag(CharacteristicPropertyType.Write) || characteristic.Properties.HasFlag(CharacteristicPropertyType.WriteWithoutResponse);
             CanNotify = characteristic.Properties.HasFlag(CharacteristicPropertyType.Notify);
+        }
+
+        public ICommand SendValueCommand => new Command<BluetoothCharacteristicViewModel>(async (characteristic) =>
+        {
+            if (characteristic.CanWrite)
+            {
+                //var valueToSend = "1"; 
+                //await characteristic.Characteristic.WriteAsync(Encoding.UTF8.GetBytes(valueToSend));
+                await characteristic.Characteristic.WriteAsync(Encoding.UTF8.GetBytes("1"));
+            }
+        });
+    }
+
+    public class BoolToConnectDisconnectConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return (bool)value ? "Desconectar" : "Conectar";
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return null;//throw new NotImplementedException();
         }
     }
 }

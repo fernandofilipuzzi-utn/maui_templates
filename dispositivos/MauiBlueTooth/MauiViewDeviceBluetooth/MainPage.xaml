@@ -1,15 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MauiViewDeviceBluetooth"
              x:Class="MauiViewDeviceBluetooth.MainPage">
 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:BoolToConnectDisconnectConverter x:Key="BoolToConnectDisconnectConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
     <ScrollView>
         <VerticalStackLayout Padding="30,0" Spacing="25">
 
             <Button Text="Escanear Dispositivos Bluetooth" Clicked="OnScanButtonClicked" />
             <Label x:Name="lbEstado" Text="" />
 
-            <ListView x:Name="deviceListView" HasUnevenRows="True">
+            <ListView x:Name="deviceListView" HasUnevenRows="True" ItemsSource="{Binding DiscoveredDevices}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -19,7 +26,11 @@
                                 <Label Text="{Binding Rssi}" FontSize="Small" LineBreakMode="WordWrap" VerticalOptions="Center" HorizontalOptions="FillAndExpand" />
                                 <Label Text="{Binding Address}" FontSize="Small" LineBreakMode="WordWrap" VerticalOptions="Center" HorizontalOptions="FillAndExpand" />
 
-                                <!-- ListView para mostrar los servicios -->
+                                <Button Text="{Binding IsConnected, Converter={StaticResource BoolToConnectDisconnectConverter}}"
+                                        Command="{Binding ConnectDisconnectCommand}" 
+                                        CommandParameter="{Binding .}" />
+
+                                <!-- servicios -->
                                 <ListView ItemsSource="{Binding Services}" HasUnevenRows="True">
                                     <ListView.ItemTemplate>
                                         <DataTemplate>
@@ -27,7 +38,7 @@
                                                 <VerticalStackLayout Padding="10" Spacing="5">
                                                     <Label Text="{Binding Name}" FontSize="Small" LineBreakMode="WordWrap" VerticalOptions="Center" HorizontalOptions="FillAndExpand" />
 
-                                                    <!-- ListView para mostrar las características -->
+                                                    <!-- caracteristicas -->
                                                     <ListView ItemsSource="{Binding Characteristics}" HasUnevenRows="True">
                                                         <ListView.ItemTemplate>
                                                             <DataTemplate>
@@ -36,9 +47,13 @@
                                                                         <Label Text="{Binding Name}" FontSize="Small" LineBreakMode="WordWrap" VerticalOptions="Center" HorizontalOptions="FillAndExpand" />
                                                                         <Label Text="{Binding Uuid}" FontSize="Small" LineBreakMode="WordWrap" VerticalOptions="Center" HorizontalOptions="FillAndExpand" />
 
-                                                                        <!-- Campo de entrada para escribir un valor -->
+                                                                        <!--campo de entrada  -->
                                                                         <Entry x:Name="entryValue" Placeholder="Escribe un valor" />
-                                                                        <Button Text="Enviar" Command="{Binding Source={RelativeSource AncestorType={x:Type ListView}}, Path=BindingContext.SendValueCommand}" CommandParameter="{Binding .}" />
+                                                                        
+                                                                        <Button Text="Enviar" 
+                                                                                Command="{Binding SendValueCommand}" 
+                                                                                CommandParameter="{Binding .}" />
+                                                                        
                                                                     </VerticalStackLayout>
                                                                 </ViewCell>
                                                             </DataTemplate>
