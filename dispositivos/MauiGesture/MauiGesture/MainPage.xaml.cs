@@ -68,27 +68,29 @@ namespace MauiGesture
 
         private void ExecuteRefreshCommand()
         {
-            // Simular una recarga de datos
             Items.Clear();
             Items.Add("Item A");
             Items.Add("Item B");
             Items.Add("Item C");
             Items.Add("Item D");
 
-            // Terminar el refresco
             IsRefreshing = false;
         }
 
-        private void ExecuteManualRefreshCommand()
+        private async void ExecuteManualRefreshCommand()
         {
-            // Simular una recarga de datos diferente
-            Items.Clear();
-            Items.Add("Manual Item 1");
-            Items.Add("Manual Item 2");
-            Items.Add("Manual Item 3");
+            IsRefreshing = true;
+            await Task.Delay(10000);
 
-            // Detener el refresco
-            IsRefreshing = false;
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                Items.Clear();
+                Items.Add("Manual Item 1");
+                Items.Add("Manual Item 2");
+                Items.Add("Manual Item 3");
+
+                IsRefreshing = false;
+            });
         }
 
         protected virtual void OnPropertyChanged(string propertyName)
