@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 
-namespace MauiBluetooth
+namespace MauiGesture
 {
     public static class MauiProgram
     {

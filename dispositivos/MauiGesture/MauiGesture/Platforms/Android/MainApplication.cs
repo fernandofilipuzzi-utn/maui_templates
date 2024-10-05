@@ -1,7 +1,7 @@
 ﻿using Android.App;
 using Android.Runtime;
 
-namespace MauiBluetooth
+namespace MauiGesture
 {
     [Application]
     public class MainApplication : MauiApplication

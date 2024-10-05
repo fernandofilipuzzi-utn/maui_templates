@@ -171,7 +171,6 @@ namespace MauiViewDeviceBluetooth
             }
             catch (Exception ex)
             {
-                // Maneja cualquier excepción que pueda ocurrir al conectar o al obtener servicios
                // await DisplayAlert("Error", $"No se pudo conectar al dispositivo: {ex.Message}", "OK");
             }
         }
@@ -220,7 +219,7 @@ namespace MauiViewDeviceBluetooth
             Characteristic = characteristic;
             Id = characteristic.Id.ToString();
             Uuid = characteristic.Uuid.ToString();
-            Name = characteristic.Name ?? "Desconocida"; // Asignar un nombre predeterminado si es nulo
+            Name = characteristic.Name ?? "Desconocida"; 
 
             // Inicializa las capacidades de la característica
             CanRead = characteristic.Properties.HasFlag(CharacteristicPropertyType.Read);

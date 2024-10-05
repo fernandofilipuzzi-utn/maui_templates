@@ -1,6 +1,6 @@
 ﻿using Foundation;
 
-namespace MauiBluetooth
+namespace MauiGesture
 {
     [Register("AppDelegate")]
     public class AppDelegate : MauiUIApplicationDelegate

@@ -1,4 +1,4 @@
-﻿namespace MauiBluetooth
+﻿namespace MauiGesture
 {
     public partial class App : Application
     {

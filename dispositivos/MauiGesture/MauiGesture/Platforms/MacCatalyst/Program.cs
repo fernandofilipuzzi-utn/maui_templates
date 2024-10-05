@@ -1,7 +1,7 @@
 ﻿using ObjCRuntime;
 using UIKit;
 
-namespace MauiBluetooth
+namespace MauiGesture
 {
     public class Program
     {
