@@ -8,7 +8,39 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{49927F12-B
 		Readme.md = Readme.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MauiGesture", "MauiGesture\MauiGesture.csproj", "{F1CA81EF-7716-46AC-9064-68870C2DE929}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MauiGesture", "MauiGesture\MauiGesture.csproj", "{F1CA81EF-7716-46AC-9064-68870C2DE929}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MauiGestureWeb", "MauiGestureWeb\MauiGestureWeb.csproj", "{634B8095-9FAC-45B2-BC31-7F51C1FC7ED1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modelos", "Modelos", "{A6624D7A-DBB6-4C13-84B1-3A393850FBE6}"
+	ProjectSection(SolutionItems) = preProject
+		docs\Modelos\1.jpeg = docs\Modelos\1.jpeg
+		docs\Modelos\2.jpeg = docs\Modelos\2.jpeg
+		docs\Modelos\3.jpeg = docs\Modelos\3.jpeg
+	EndProjectSection
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Disenio", "Disenio\", "{54DEC328-E014-4E04-A9B2-965D4F7398C1}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_65158"
+		Debug.AspNetCompiler.PhysicalPath = "Disenio\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_65158\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_65158"
+		Release.AspNetCompiler.PhysicalPath = "Disenio\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_65158\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "65158"
+		SlnRelativePath = "Disenio\"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MauiGestureWeb2", "MauiGestureWeb2\MauiGestureWeb2.csproj", "{306CF4ED-1BC3-4E36-B4CE-FCDE95B4F2D1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -22,9 +54,28 @@ Global
 		{F1CA81EF-7716-46AC-9064-68870C2DE929}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F1CA81EF-7716-46AC-9064-68870C2DE929}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F1CA81EF-7716-46AC-9064-68870C2DE929}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{634B8095-9FAC-45B2-BC31-7F51C1FC7ED1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{634B8095-9FAC-45B2-BC31-7F51C1FC7ED1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{634B8095-9FAC-45B2-BC31-7F51C1FC7ED1}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{634B8095-9FAC-45B2-BC31-7F51C1FC7ED1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{634B8095-9FAC-45B2-BC31-7F51C1FC7ED1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{634B8095-9FAC-45B2-BC31-7F51C1FC7ED1}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{54DEC328-E014-4E04-A9B2-965D4F7398C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54DEC328-E014-4E04-A9B2-965D4F7398C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54DEC328-E014-4E04-A9B2-965D4F7398C1}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{54DEC328-E014-4E04-A9B2-965D4F7398C1}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{306CF4ED-1BC3-4E36-B4CE-FCDE95B4F2D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{306CF4ED-1BC3-4E36-B4CE-FCDE95B4F2D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{306CF4ED-1BC3-4E36-B4CE-FCDE95B4F2D1}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{306CF4ED-1BC3-4E36-B4CE-FCDE95B4F2D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{306CF4ED-1BC3-4E36-B4CE-FCDE95B4F2D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{306CF4ED-1BC3-4E36-B4CE-FCDE95B4F2D1}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A6624D7A-DBB6-4C13-84B1-3A393850FBE6} = {49927F12-B6ED-466B-910B-F32789B61A0D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {252D1BB4-5820-4C4A-8A99-1AB358732312}

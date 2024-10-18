@@ -3,22 +3,25 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiGesture.MainPage">
 
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal" VerticalOptions="Center" HorizontalOptions="StartAndExpand" BackgroundColor="#A0CECB">
+        </StackLayout>
+    </NavigationPage.TitleView>
+
     <StackLayout>
 
-        <RefreshView IsRefreshing="{Binding IsRefreshing}"
-                     Command="{Binding RefreshCommand}">
-            <ScrollView>
-                <FlexLayout Direction="Row"
-                            Wrap="Wrap"
-                            AlignItems="Center"
-                            AlignContent="Center"
-                            BindableLayout.ItemsSource="{Binding Items}"
-                            BindableLayout.ItemTemplate="{StaticResource ColorItemTemplate}" />
-            </ScrollView>
+        <RefreshView IsRefreshing="{Binding IsRefreshing}" Command="{Binding RefreshCommand}">
+        
+            <FlexLayout Direction="Row" Wrap="Wrap" AlignItems="Center" AlignContent="Center"
+                        BindableLayout.ItemsSource="{Binding Items}"
+                        BindableLayout.ItemTemplate="{StaticResource ColorItemTemplate}" />
+
+           
         </RefreshView>
 
-        <Button Text="Refrescar Manualmente"
-                Command="{Binding ManualRefreshCommand}" />
+        <Button Text="Refrescar Manualmente 1" Command="{Binding ManualRefreshCommand}" />
+
+        <Button Text="Refrescar Manualmente 2" Clicked="Button_Clicked" />
 
     </StackLayout>
 

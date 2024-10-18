@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiGestureWeb2.MainPage">
+
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal" VerticalOptions="Center" HorizontalOptions="StartAndExpand" BackgroundColor="#A0CECB">
+            <Button Text="Volver" TextTransform="None" ImageSource="back.png" Clicked="Button_Clicked" TextColor="Black" BackgroundColor="Transparent"></Button>
+        </StackLayout>
+    </NavigationPage.TitleView>
+
+    <Grid>
+    <!--<StackLayout>-->
+        <RefreshView x:Name="refreshView"  Loaded="refreshView_Loaded"  Refreshing="refreshView_Refreshing">
+            <WebView x:Name="Navegador" Navigating="Navegador_Navigating"
+                            Navigated="Navegador_Navigated" 
+                            HorizontalOptions="FillAndExpand" 
+                            VerticalOptions="FillAndExpand" ></WebView>
+        </RefreshView>
+
+        <Grid x:Name="Mensage" IsVisible="false">
+            <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="*" /></Grid.RowDefinitions>
+
+            <ScrollView Grid.Row="1">
+                <StackLayout Orientation="Vertical" HorizontalOptions="Center" Padding="30,24,30,24" Spacing="10">
+
+                    <Image Source="satelite.gif" HorizontalOptions="Center" Scale="0.5" IsAnimationPlaying="true"></Image>
+
+                    <Label Text="Buscando posición GPS" FontSize="Title" HorizontalTextAlignment="Center"   />
+
+                    <Label Text="Aguarde unos segundos, y será redirigido automáticamente" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" FontSize="20" Margin="0,40,0,0" Padding="0,0,0,0"/>
+                    
+                </StackLayout>
+            </ScrollView>
+        </Grid>
+
+        <Grid x:Name="Reconexion" IsVisible="false">
+            <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="*" /></Grid.RowDefinitions>
+
+            <ScrollView Grid.Row="1">
+                <StackLayout Orientation="Vertical" HorizontalOptions="Center" Padding="30,24,30,24" Spacing="10">
+                    
+                    <Image Source="reconexion.gif" HorizontalOptions="Center" Scale="0.5" IsAnimationPlaying="true"></Image>
+                    
+                    <Label Text="Se interrumpió la conexión" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center"   FontSize="Title" Margin="0,30,0,0"/>
+                    
+                    <Label Text="Verifique la conexión a la red y vuelva a intentar" HorizontalOptions="FillAndExpand"
+       HorizontalTextAlignment="Center" FontSize="20" Margin="0,40,0,0" Padding="0,0,0,0"/>
+
+                    <Button Text="Volver a cargar" TextTransform="None" HorizontalOptions="Center" Clicked="refreshView_Refreshing" TextColor="White" BackgroundColor="#007bff" CornerRadius="15" Margin="0,80,0,0"></Button>
+                    
+                </StackLayout>
+            </ScrollView>
+        </Grid>
+
+        <Grid x:Name="Timeout" IsVisible="false">
+            <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="*" /></Grid.RowDefinitions>
+
+            <ScrollView Grid.Row="1">
+                <StackLayout Orientation="Vertical" Padding="30,24,30,24" Spacing="10">
+                    <Image Source="timer.gif" Scale="0.5" IsAnimationPlaying="true"></Image>
+                    
+                    <Label Text="Tiempo de Espera Excedido"  HorizontalOptions="Center" FontSize="Title"/>
+
+                    <Label Text="El servidor no ha respondido a tiempo. Aguarda unos minutos e intenta nuevamente"  HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" FontSize="20" Margin="0,30,0,0" Padding="0,0,0,0"/>
+
+                    <Button Text="Volver a cargar" TextTransform="None" HorizontalOptions="Center" Clicked="refreshView_Refreshing" TextColor="White" BackgroundColor="#007bff" CornerRadius="15" Margin="0,80,0,0"></Button>
+                    
+                </StackLayout>
+            </ScrollView>
+        </Grid>
+
+    </Grid>
+
+</ContentPage>

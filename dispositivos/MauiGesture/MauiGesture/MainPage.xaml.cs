@@ -6,8 +6,7 @@ namespace MauiGesture
 {
     public partial class MainPage : ContentPage
     {
-       //
-
+        //
         public MainPage()
         {
             InitializeComponent();
@@ -29,7 +28,10 @@ namespace MauiGesture
             BindingContext = new MainViewModel();
         }
 
-        
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            (BindingContext as MainViewModel)?.RefreshCommand.Execute(this);
+        }
     }
 
     public class MainViewModel : INotifyPropertyChanged
@@ -53,7 +55,7 @@ namespace MauiGesture
         public ICommand RefreshCommand { get; }
         public ICommand ManualRefreshCommand { get; }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         public MainViewModel()
         {
@@ -79,7 +81,7 @@ namespace MauiGesture
 
         private async void ExecuteManualRefreshCommand()
         {
-            IsRefreshing = true;
+            
             await Task.Delay(10000);
 
             MainThread.BeginInvokeOnMainThread(() =>
