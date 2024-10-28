@@ -15,10 +15,10 @@
         private void refreshView_Loaded(object sender, EventArgs e)
         { }
 
-        int estado = 1;
+        int estadoConexion = 1;
         private void refreshView_Refreshing(object sender, EventArgs e)
         {
-            if (estado == 1)
+            if (estadoConexion == 1)
             {
                 //Navegador.Source = url;
                 Navegador.Reload();
@@ -27,74 +27,78 @@
 
         private void Navegador_Navigating(object sender, WebNavigatingEventArgs e)
         {
-            estado = 2;
+            estadoConexion = 2;
             refreshView.IsRefreshing = true; //esperando respuesta
 
             var current = Connectivity.NetworkAccess;
             if (current == NetworkAccess.Internet)
             {
-                ResolverDesconexion("RECONECTAR", null);
+                ResolverConexion("RECONECTAR", null);
             }
             else
             {
-                ResolverDesconexion("DESCONEXION", null);
+                ResolverConexion("DESCONEXION", null);
             }
-
         }
 
         private void Navegador_Navigated(object sender, WebNavigatedEventArgs e)
         {
             refreshView.IsRefreshing = false; 
-            estado = 1;
+            estadoConexion = 1;
 
             if (e.Result == WebNavigationResult.Failure)
             {
-                ResolverDesconexion("DESCONEXION", e);
-
+                ResolverConexion("DESCONEXION", e);
             }
             else if (e.Result == WebNavigationResult.Timeout)
             {
-                ResolverDesconexion("TIMEOUT", e);
+                ResolverConexion("TIMEOUT", e);
             }
             else
             {
                 var current = Connectivity.NetworkAccess;
                 if (current == NetworkAccess.Internet)
                 {
+                    //EsperandoGPS
                     Navegador.IsVisible = true;
-                    Mensage.IsVisible = false;
-                    Reconexion.IsVisible = false;
-                    Timeout.IsVisible = false;
+                    EsperandoGPS.IsVisible = false;
+                    MostrarReconexion.IsVisible = false;
+                    MostrarTimeout.IsVisible = false;
                 }
             }
         }
 
-        private void ResolverDesconexion(string opcion, WebNavigatedEventArgs e)
+        private void ResolverConexion(string opcion, WebNavigatedEventArgs e)
         {
             switch (opcion)
             {
                 case "RECONECTAR":
                 {
                     refreshView.IsRefreshing = false;
-                    estado = 1;
+                    estadoConexion = 1;
                 } 
                 break;
                 case "GEOLOCALIZANDO":
                 {
                     Navegador.IsVisible = false;
-                    Mensage.IsVisible = true;
+                    EsperandoGPS.IsVisible = true;
+                    MostrarReconexion.IsVisible = false;
                 }
                 break;
                 case "DESCONEXION":
                 {
                     Navegador.IsVisible = false;
-                    Reconexion.IsVisible = true;
+                    EsperandoGPS.IsVisible = false;
+                    MostrarTimeout.IsVisible = false;
+                    MostrarReconexion.IsVisible = true;
                 }
                 break;
                 case "TIMEOUT":
                 {
                     Navegador.IsVisible = false;
-                    Timeout.IsVisible = true;
+                    EsperandoGPS.IsVisible = false;
+                    MostrarTimeout.IsVisible = false;
+                    MostrarReconexion.IsVisible = false;
                 }
                 break;
             }

@@ -10,15 +10,12 @@
     </NavigationPage.TitleView>
 
     <Grid>
-    <!--<StackLayout>-->
+
         <RefreshView x:Name="refreshView"  Loaded="refreshView_Loaded"  Refreshing="refreshView_Refreshing">
-            <WebView x:Name="Navegador" Navigating="Navegador_Navigating"
-                            Navigated="Navegador_Navigated" 
-                            HorizontalOptions="FillAndExpand" 
-                            VerticalOptions="FillAndExpand" ></WebView>
+            <WebView x:Name="Navegador" Navigating="Navegador_Navigating" Navigated="Navegador_Navigated" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" ></WebView>
         </RefreshView>
 
-        <Grid x:Name="Mensage" IsVisible="false">
+        <Grid x:Name="EsperandoGPS" IsVisible="false">
             <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="*" /></Grid.RowDefinitions>
 
             <ScrollView Grid.Row="1">
@@ -26,7 +23,7 @@
 
                     <Image Source="satelite.gif" HorizontalOptions="Center" Scale="0.5" IsAnimationPlaying="true"></Image>
 
-                    <Label Text="Buscando posición GPS" FontSize="Title" HorizontalTextAlignment="Center"   />
+                    <Label Text="Buscando posición GPS" FontSize="Title" HorizontalTextAlignment="Center" />
 
                     <Label Text="Aguarde unos segundos, y será redirigido automáticamente" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" FontSize="20" Margin="0,40,0,0" Padding="0,0,0,0"/>
                     
@@ -34,7 +31,7 @@
             </ScrollView>
         </Grid>
 
-        <Grid x:Name="Reconexion" IsVisible="false">
+        <Grid x:Name="MostrarReconexion" IsVisible="false">
             <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="*" /></Grid.RowDefinitions>
 
             <ScrollView Grid.Row="1">
@@ -53,7 +50,7 @@
             </ScrollView>
         </Grid>
 
-        <Grid x:Name="Timeout" IsVisible="false">
+        <Grid x:Name="MostrarTimeout" IsVisible="false">
             <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="*" /></Grid.RowDefinitions>
 
             <ScrollView Grid.Row="1">

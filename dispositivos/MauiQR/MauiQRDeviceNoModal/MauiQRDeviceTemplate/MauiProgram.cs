@@ -15,12 +15,13 @@ namespace MauiQRDeviceTemplate
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 })
-                .ConfigureMauiHandlers(handlers => {
+                .ConfigureMauiHandlers(handlers =>
+                {
                     handlers.AddBarcodeScannerHandler();
-                }); 
+                });
 
 #if DEBUG
-    		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
 
             return builder.Build();

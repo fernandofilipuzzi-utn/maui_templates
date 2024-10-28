@@ -1,6 +1,4 @@
 using BarcodeScanner.Mobile;
-using System.Reflection.Metadata;
-using static Microsoft.Maui.ApplicationModel.Permissions;
 
 namespace MauiQRDeviceTemplate
 {
