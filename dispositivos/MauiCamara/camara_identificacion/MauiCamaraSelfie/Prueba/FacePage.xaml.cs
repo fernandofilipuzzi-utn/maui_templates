@@ -12,21 +12,29 @@ public partial class FacePage : ContentPage
 	{
 		InitializeComponent();
 
+       
+    }
+
+    protected async override void OnNavigatedTo(NavigatedToEventArgs args)
+    {
+        base.OnNavigatedTo(args);
+
+        var availableCameras = await MyCamera.GetAvailableCameras(CancellationToken.None);
+        var frontCamera = availableCameras.FirstOrDefault(c => c.Position == CameraPosition.Front);
+
+        if (frontCamera != null)
+        {
+
+            MyCamera.SelectedCamera = frontCamera;
+
+        }
     }
 
     async private void MyCamera_MediaCaptured(object? sender, CommunityToolkit.Maui.Views.MediaCapturedEventArgs e)
     {
         if (MyCamera.IsAvailable == true)
         {
-            var availableCameras = await MyCamera.GetAvailableCameras(CancellationToken.None);
-            var frontCamera = availableCameras.FirstOrDefault(c => c.Position == CameraPosition.Front);
-
-            if (frontCamera != null)
-            {
-
-                MyCamera.SelectedCamera = frontCamera;
-
-            }
+            
 
             if(e.Media!=null)
             { 
@@ -39,6 +47,8 @@ public partial class FacePage : ContentPage
 
     private async void Button_Clicked(object sender, EventArgs e)
     {
+        
+
         await MyCamera.CaptureImage(CancellationToken.None);
 
         await Shell.Current.GoToAsync($"//{nameof(MainPage)}");

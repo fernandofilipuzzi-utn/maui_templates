@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Maui;
 using CommunityToolkit.Maui.Core;
 using Microsoft.Extensions.Logging;
+using SkiaSharp.Views.Maui.Handlers;
 
 namespace Prueba
 {
@@ -14,6 +15,10 @@ namespace Prueba
                 .UseMauiCommunityToolkit()
                 .UseMauiCommunityToolkitCamera()
                 .UseMauiCommunityToolkitCore()
+                .ConfigureMauiHandlers(handlers =>
+                {
+                    handlers.AddHandler<TransparentCircleView, SKCanvasViewHandler>();
+                })
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");

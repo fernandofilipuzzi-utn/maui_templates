@@ -7,3 +7,4 @@ https://github.com/jfversluis/MauiCameraViewSample/blob/main/MauiCameraViewSampl
 
 https://learn.microsoft.com/en-us/dotnet/communitytoolkit/maui/views/camera-view?tabs=android
 
+SkiaSharp.Views.Maui.Controls
