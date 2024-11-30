@@ -1,0 +1,53 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35506.116
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ej_Tookit", "Ej_Tookit\Ej_Tookit.csproj", "{66FF805C-3273-45B1-9215-1F0989957A03}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ej_Camera_MAUI", "Ej_Camera_MAUI\Ej_Camera_MAUI.csproj", "{4CD9A66F-22D5-4F1F-8527-74C048FED138}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ej_TakePhoto", "Ej_TakePhoto\Ej_TakePhoto.csproj", "{A9E20992-CA1B-4561-9E05-9AD92F4E66CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prueba", "Prueba\Prueba.csproj", "{E722F12A-09C1-4DE4-B003-C0DFE609D630}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{1E075376-2A8A-4A36-8D54-BE09903A0E25}"
+	ProjectSection(SolutionItems) = preProject
+		docs\Readme.md = docs\Readme.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{66FF805C-3273-45B1-9215-1F0989957A03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66FF805C-3273-45B1-9215-1F0989957A03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66FF805C-3273-45B1-9215-1F0989957A03}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{66FF805C-3273-45B1-9215-1F0989957A03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66FF805C-3273-45B1-9215-1F0989957A03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66FF805C-3273-45B1-9215-1F0989957A03}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{4CD9A66F-22D5-4F1F-8527-74C048FED138}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CD9A66F-22D5-4F1F-8527-74C048FED138}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CD9A66F-22D5-4F1F-8527-74C048FED138}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{4CD9A66F-22D5-4F1F-8527-74C048FED138}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CD9A66F-22D5-4F1F-8527-74C048FED138}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4CD9A66F-22D5-4F1F-8527-74C048FED138}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{A9E20992-CA1B-4561-9E05-9AD92F4E66CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9E20992-CA1B-4561-9E05-9AD92F4E66CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9E20992-CA1B-4561-9E05-9AD92F4E66CF}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{A9E20992-CA1B-4561-9E05-9AD92F4E66CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9E20992-CA1B-4561-9E05-9AD92F4E66CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9E20992-CA1B-4561-9E05-9AD92F4E66CF}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{E722F12A-09C1-4DE4-B003-C0DFE609D630}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E722F12A-09C1-4DE4-B003-C0DFE609D630}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E722F12A-09C1-4DE4-B003-C0DFE609D630}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{E722F12A-09C1-4DE4-B003-C0DFE609D630}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E722F12A-09C1-4DE4-B003-C0DFE609D630}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E722F12A-09C1-4DE4-B003-C0DFE609D630}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

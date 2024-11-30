@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Prueba.FacePage"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             Title="FacePage">
+    <VerticalStackLayout>
+        <Grid>
+
+            <toolkit:CameraView x:Name="MyCamera"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" MediaCaptured="MyCamera_MediaCaptured" />
+
+            <Frame WidthRequest="200" HeightRequest="300" BorderColor="White" BackgroundColor="Transparent" CornerRadius="150" HorizontalOptions="Center" VerticalOptions="Center"
+               HasShadow="False" />
+           
+        </Grid>
+        <Button Text="SMILE" Clicked="Button_Clicked" />
+    </VerticalStackLayout>
+</ContentPage>

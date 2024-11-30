@@ -51,27 +51,7 @@
             Route="AboutPage"
             Icon="dotnet_bot.png"/>
     </FlyoutItem>
-
-    <TabBar>
-        <ShellContent
-            Title="Customer"        
-            ContentTemplate="{DataTemplate local:MainPage}"
-            Route="MainPage"
-            Icon="dotnet_bot.png"/>
-
-        <ShellContent
-            Title="Contacto"        
-            ContentTemplate="{DataTemplate local:ContactUs}"
-            Route="ContactPage"
-            Icon="dotnet_bot.png"/>
-
-        <ShellContent
-            Title="Sobre Nosotros"        
-            ContentTemplate="{DataTemplate local:AboutUs}"
-            Route="AboutPage"
-            Icon="dotnet_bot.png"/>
-    </TabBar>
-
+   
     <TabBar>
         <ShellContent
          Title="Customer"        
