@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiCameraView.MainPage">
+    <ScrollView>
+        <VerticalStackLayout Padding="30,0" Spacing="25">
+
+            <WebView x:Name="Navegador" Navigating="Navegador_Navigating"  Navigated="Navegador_Navigated"                        HorizontalOptions="FillAndExpand"                     
+                  VerticalOptions="FillAndExpand" ></WebView>
+
+            <Label x:Name=" lbnEstado" Text="" Style="{StaticResource SubHeadline}"
+                      SemanticProperties.HeadingLevel="Level2"
+                      SemanticProperties.Description="Ejemplo 1" />
+
+            <Image x:Name="myImage" BackgroundColor="Gray" WidthRequest="300" HeightRequest="300" HorizontalOptions="Center" />
+
+            <Button x:Name="btnFoto" Text="Tomar Foto"  SemanticProperties.Hint="Tomar Foto" Clicked="btnFoto_Clicked" HorizontalOptions="Fill" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
+

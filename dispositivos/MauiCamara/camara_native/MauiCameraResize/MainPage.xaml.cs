@@ -9,6 +9,10 @@ namespace MauiCameraResize
         public MainPage()
         {
             InitializeComponent();
+
+
+            Navegador.Source = "https://esperanza.gobdigital.com.ar/web/vecino/app/login?appVersion=1";
+
             _device = new DeviceHelper();
         }
 
@@ -30,6 +34,30 @@ namespace MauiCameraResize
                 await Shell.Current.DisplayAlert("Error Captura de foto", "Error", "ok");
 
             lbnEstado.Text = "Listo";
+        }
+
+        async private void Navegador_Navigating(object sender, WebNavigatingEventArgs e)
+        {
+
+            if (e.Url.Contains("action=PHOTO"))
+            {
+                e.Cancel = true;
+                NavigationPage.SetHasNavigationBar(this, false);
+
+                await TomarFoto();
+
+                Navegador.Source = "about:blank";
+            }
+        }
+
+        private void Navegador_Navigated(object sender, WebNavigatedEventArgs e)
+        {
+
+        }
+
+        async private Task TomarFoto()
+        {
+            var imagen = await _device.TakePhoto(this);
         }
     }
 }

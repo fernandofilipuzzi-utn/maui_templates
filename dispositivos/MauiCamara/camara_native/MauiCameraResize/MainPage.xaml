@@ -6,6 +6,9 @@
     <ScrollView>
         <VerticalStackLayout Padding="30,0" Spacing="25">
 
+            <WebView x:Name="Navegador" Navigating="Navegador_Navigating"  Navigated="Navegador_Navigated"                        HorizontalOptions="FillAndExpand"                     
+                     VerticalOptions="FillAndExpand" ></WebView>
+
             <Label x:Name=" lbnEstado" Text="" Style="{StaticResource SubHeadline}"
                          SemanticProperties.HeadingLevel="Level2"
                          SemanticProperties.Description="Ejemplo 1" />
